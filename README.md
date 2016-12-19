@@ -49,7 +49,7 @@ This script is the main script which is responsible for setting up the required 
 After that, please execute the below command to start the provisioning of the respective environment
 
 ```
-./cloud-automation.sh -a wp-blog -e dev -c 2 -s "t2.micro"
+./cloud-automation.sh -a wp-blog -e dev -c 1 -s "t2.micro"
 ```
 -a represents the name of the application for identification
 -e represents the name of the environment

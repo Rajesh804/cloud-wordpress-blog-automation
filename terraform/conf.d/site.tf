@@ -23,7 +23,7 @@ resource "aws_security_group" "default" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
-    # Anywhere HTTP
+    # Open HTTP
     ingress {
         from_port = 80
         to_port = 80
@@ -31,7 +31,7 @@ resource "aws_security_group" "default" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
-    # outbound rules
+    # Outbond rules
     egress {
         from_port = 0
         to_port = 0
@@ -43,8 +43,6 @@ resource "aws_security_group" "default" {
 resource "aws_elb" "web" {
   name = "wordpress-elb-${var.APP_NAME}-${var.USER_NAME}"
 
-  # The same availability zone as our instance
-  # availability_zones = ["${aws_instance.web.1.availability_zone}"]
   cross_zone_load_balancing = true
   idle_timeout = 400
   connection_draining = true
@@ -73,13 +71,6 @@ resource "aws_elb" "web" {
 }
 
 resource "aws_instance" "web" {
-#  # Not sure if I am going to use this, but just in case I need to connect to host 
-#  connection {
-#    # User to user for connecting 
-#    user = "ubuntu"
-#    # Which key to use for user 
-#    key_file = "${var.key_path}"
-#  }
 
   instance_type = "${var.SERVER_SIZE}"
   count = "${var.NUM_SERVERS}"
@@ -96,11 +87,4 @@ resource "aws_instance" "web" {
         Name = "wp-docker-ec-${var.APP_NAME}-${var.USER_NAME}"
     }
 
-# We could run commands directory on server  
-#  provisioner "remote-exec" {
-#   inline = [
-#       "touch /tmp/1nikun",
-#        "touch /tmp/2nikun"
-#    ]
-#  }
 }

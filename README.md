@@ -26,19 +26,19 @@ git clone https://github.com/Rajesh804/cloud-wordpress-blog-automation.git
 cd cloud-wordpress-blog-automation
 ```
 
-There are two shell scripts for use.
-1. prerequisites.sh
+#There are two shell scripts for use.
+1. setup_prerequisites.sh
 2. cloud-automation.sh
 
-##prerequisites.sh: 
+##setup_prerequisites.sh: 
 This script could be used for setting up all the Prerequisites that are required. It could be used by any one who wants to have the ansible and terraform scripts to be working. To execute the script, use the below command:
 
 ```
-./prerequisites.sh
+./setup_prerequisites.sh
 ```
 
 ##cloud-automation.sh:
-This script is the main script which is responsible for setting up the required running environment. Before running the script, please make sure you have all the correct variables inside terraform/variables.tf files for below:
+This script is the main script which is responsible for setting up the required running environment. Before running the script, please make sure you have all the correct variables inside terraform/conf.d/variables.tf files for below:
 
           aws_region = "<AWS Region>"
           key_path = "<AWS PEM key path>" 
@@ -57,3 +57,6 @@ After that, please execute the below command to start the provisioning of the re
 -a represents the type of the ec2 instance
 
 After this, you should be having a working environment of your wordpress blog.
+
+## Continuous Integration & Delivery
+This is the process where we can automate the building of our own docker containers using *Jenkins* using "Dockerfile" and push them to our private *Docker Registry*. And then we can set the required versions of containers in the ansible playbook and that will eventually deploy the required version of the code. 

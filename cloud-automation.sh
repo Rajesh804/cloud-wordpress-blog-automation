@@ -54,9 +54,10 @@ KEY_PAIR=`cat terraform/conf.d/variables.tf | grep key_path -A2 | tail -1 | awk 
 sleep 60
 export TF_STATE="terraform/conf.d/terraform.tfstate"
 export ANSIBLE_HOST_KEY_CHECKING=False
-terraforminventorypath=`pwd`/terraform/bin/terraform-inventory
-ansible-playbook --inventory-file=$terraforminventorypath --private-key=$KEY_PAIR ansible/deploy.yml 
+terraform_inventory_path=`pwd`/terraform/bin/terraform-inventory
+ansible-playbook --inventory-file=$terraform_inventory_path --private-key=$KEY_PAIR ansible/deploy.yml 
 
-echo "Deployment completed successfuly. You can access the blog by accessing the below URL:"
+GREEN=`tput setaf 2`
+echo $GREEN"Deployment completed successfuly. You can access the blog by accessing the below URL:"
 BLOG=`cat terraform/conf.d/terraform.tfstate | grep ebs_address -A3 | tr -d '"' | tr -d " " | tail -1 | awk -F: {'print $2'}`
-echo -e -t $BLOG
+echo BLOG_URL: $GREEN$BLOG

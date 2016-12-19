@@ -26,7 +26,7 @@ git clone https://github.com/Rajesh804/cloud-wordpress-blog-automation.git
 cd cloud-wordpress-blog-automation
 ```
 
-#There are two shell scripts for use.
+###There are two shell scripts for use.
 1. setup_prerequisites.sh
 2. cloud-automation.sh
 

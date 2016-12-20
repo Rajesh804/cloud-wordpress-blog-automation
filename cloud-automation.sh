@@ -1,4 +1,14 @@
 #!/bin/sh
+##############################################################
+#  Script     : cloud-automation
+#  Author     : Rajesh Reddy
+#  Date       : 19/12/2016
+#  Last Edited: 20/12/2016, Rajesh Reddy
+#  Description: "The script to AWS EC2 instances using 
+#		terraform and use ansible to deploy 
+#		Wordpress and MariaDB as a microservice
+#		in Docker on top of Docker Compose"
+##############################################################
 
 usage() { 
 echo "cloud-automation.sh -a <app name> -e <environment> -c <num_servers> -s <server_size>" 1>&2; read -p "Press any key to exit " answer; exit 1; 

@@ -42,10 +42,10 @@ fi
 
 shift $((OPTIND-1))
 read -p "AWS_ACCESS_KEY_ID: " AWS_ACCESS_KEY_ID
-read -p "AWS_SECRET_ACCESS_KEY: " AWS_SECRET_ACCESS_KEY 
+read -p "AWS_SECRET_ACCESS_KEY: " AWS_SECRET_ACCESS_KEY
+read -p "User name (without space): " USER_NAME
 export TF_VAR_AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-export TF_VAR_AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-read -p "User name (without space): " USER_NAME 
+export TF_VAR_AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY 
 export TF_VAR_USER_NAME=$USER_NAME
 export TF_VAR_NUM_SERVERS=$num_servers
 export TF_VAR_SERVER_SIZE=$server_size
@@ -55,7 +55,7 @@ env | grep TF_VAR
 
 export PATH=$PATH:`pwd`/terraform/bin
 
-read -p "Press Enter to continue or Ctrl+C to cancel" createconfirmation
+read -p "Press Enter to continue or Ctrl+C to cancel" confirm
 cd terraform/conf.d
 terraform apply .
 cd ../..
@@ -70,4 +70,4 @@ ansible-playbook --inventory-file=$terraform_inventory_path --private-key=$KEY_P
 GREEN=`tput setaf 2`
 echo $GREEN"Deployment completed successfuly. You can access the blog by accessing the below URL:"
 BLOG=`cat terraform/conf.d/terraform.tfstate | grep ebs_address -A3 | tr -d '"' | tr -d " " | tail -1 | awk -F: {'print $2'}`
-echo BLOG_URL: $GREEN$BLOG
+echo BLOG_URL: $GREEN"http://"$BLOG
